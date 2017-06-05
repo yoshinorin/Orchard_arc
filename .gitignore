@@ -26,3 +26,6 @@ project/plugins/project/
 .ensime_cache/
 
 .history
+
+# VS Code
+.vscode
