@@ -11,6 +11,20 @@ import app.models.{Account}
 import javax.inject.Inject
 import scala.concurrent.Future
 import slick.driver.H2Driver.api._
+import AccountController._
+
+object AccountController {
+  case class AccountForm(id: Option[Long], userName: String, password: String, isAdmin: Option[Boolean])
+
+  val accountForm = Form(
+    mapping(
+      "id"          -> optional(longNumber),
+      "userName"    -> nonEmptyText(maxLength = 255),
+      "password"    -> nonEmptyText(maxLength = 255),
+      "isAdmin"     -> optional(boolean)
+    )(AccountForm.apply)(AccountForm.unapply)
+  )
+}
 
 class AccountController @Inject()(val dbConfigProvider: DatabaseConfigProvider,
                                   val messagesApi: MessagesApi) extends Controller
