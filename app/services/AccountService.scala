@@ -1,11 +1,17 @@
 package app.services
 
+import javax.inject.Inject
+
 import scala.concurrent._
-import slick.driver.MySQLDriver.api._
+import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
+import slick.driver.JdbcProfile
+
 import app.models._
 
-trait AccountService extends AccountComponent {
-  val db = Database.forConfig("database")
-  def getAccounts(id: Option[Long], userName: String, password: String, isAdmin: Option[Boolean]): Future[Option[Account]] =
-    db.run(Accounts.result.headOption)
+class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] {
+  import driver.api._
+
+  lazy val Accounts = TableQuery[Accounts]
+
+  def getAccounts: Future[Option[Account]] = db.run(Accounts.result.headOption)
 }
