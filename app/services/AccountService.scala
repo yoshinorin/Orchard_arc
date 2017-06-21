@@ -17,4 +17,10 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
   def getAccounts: Future[Seq[Account]] = {
     db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty)).result)
   }
+
+  def getAccountByUserName(userName: String): Future[Option[Account]] = {
+    db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind)).result.headOption)
+  }
+}
+
 }
