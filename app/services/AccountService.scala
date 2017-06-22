@@ -52,7 +52,7 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
     }
   }
 
-  def existsAdmin: Boolean = {
+  private def existsAdmin: Boolean = {
     val admin = Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.isAdmin === true)).result.headOption), Duration.Inf)
     if (admin != None){
       true
