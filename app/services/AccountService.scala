@@ -3,10 +3,10 @@ package app.services
 import javax.inject.Inject
 
 import scala.concurrent._
+import scala.concurrent.duration.Duration
 import ExecutionContext.Implicits.global
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.driver.JdbcProfile
-
 import app.models._
 
 class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] {
@@ -18,8 +18,9 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
     db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty)).result)
   }
 
-  def getAccountByUserName(userName: String): Future[Option[Account]] = {
-    db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind)).result.headOption)
+  def getAccountByUserName(userName: String): Option[Account] = {
+    Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind)).result.headOption), Duration.Inf)
+  }
   }
 }
 
