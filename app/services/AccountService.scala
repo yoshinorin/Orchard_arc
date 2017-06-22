@@ -21,6 +21,23 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
   def getAccountByUserName(userName: String): Option[Account] = {
     Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind)).result.headOption), Duration.Inf)
   }
+
+  def createAccount(userName: String, password: String, isAdmin: Option[Boolean]): Boolean = {
+    if (getAccountByUserName(userName) != None) {
+      false
+    } else {
+      val account = Account(
+        id        = 0,
+        userName  = userName,
+        password  = password,
+        isAdmin   = isAdmin,
+        createdAt = new java.sql.Timestamp(System.currentTimeMillis()),
+        updatedAt = None,
+        deletedAt = None
+      )
+      db.run(accountsQuery += account)
+      true
+    }
   }
 }
 
