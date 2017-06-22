@@ -60,6 +60,17 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
       false
     }
   }
+
+  private def existsAdminExcludeMySelf(userName: String): Boolean = {
+    val admin = Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.isAdmin === true) && (a.userName =!= userName)).result.headOption), Duration.Inf)
+    if (admin != None){
+      true
+    } else {
+      false
+    }
+  }
+}
+
 }
 }
 
