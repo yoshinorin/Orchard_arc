@@ -52,6 +52,18 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
     }
   }
 
+  def deleteAccount(userName: String): Boolean = {
+    if (existsAdminExcludeMySelf(userName)) {
+      db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind))
+        .map(a => a.deletedAt)
+        .update(Some(new java.sql.Timestamp(System.currentTimeMillis())))
+      )
+      true
+    } else {
+      false
+    }
+  }
+
   private def existsAdmin: Boolean = {
     val admin = Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.isAdmin === true)).result.headOption), Duration.Inf)
     if (admin != None){
