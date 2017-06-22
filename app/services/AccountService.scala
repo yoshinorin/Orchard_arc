@@ -82,8 +82,3 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
     }
   }
 }
-
-}
-}
-
-}
