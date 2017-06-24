@@ -72,20 +72,16 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
   }
 
   private def existsAdmin: Boolean = {
-    val admin = Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.isAdmin === true)).result.headOption), Duration.Inf)
-    if (admin != None){
-      true
-    } else {
-      false
+    Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.isAdmin === true)).result.headOption), Duration.Inf) match {
+      case Some(_) => true
+      case _ => false
     }
   }
 
   private def existsAdminExcludeMySelf(userName: String): Boolean = {
-    val admin = Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.isAdmin === true) && (a.userName =!= userName)).result.headOption), Duration.Inf)
-    if (admin != None){
-      true
-    } else {
-      false
+    Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.isAdmin === true) && (a.userName =!= userName)).result.headOption), Duration.Inf) match {
+      case Some(_) => true
+      case _ => false
     }
   }
 }
