@@ -1,0 +1,30 @@
+@(users: Seq[app.models.Account])(implicit request: Request[Any], messages: Messages)
+@import helper._
+
+@main("Sign Up") {
+<div class="col-xs-6 col-xs-offset-3">
+  <div class="panel panel-default">
+    <div class="panel-heading">Users</div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>UserName</th>
+            <th>Administrator</th>
+            <th>Registered</th>
+            <th>Updated</th>
+          </tr>
+        </thead>
+      @users.map { user =>
+        <tr>
+          <td>@user.userName</td>
+          <td>@user.isAdmin</td>
+          <td>@user.createdAt</td>
+          <td>@user.updatedAt</td>
+        </tr>
+      }
+      </table>
+    </div>
+  </div>
+</div>
+}
