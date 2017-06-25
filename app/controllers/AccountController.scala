@@ -4,11 +4,11 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
-import play.api.i18n.{MessagesApi, I18nSupport}
-import play.api.db.slick._
-import slick.driver.JdbcProfile
-import app.models.{Account}
+import play.api.i18n.{I18nSupport, MessagesApi}
+import app.models._
+import app.services.{AccountService, _}
 import javax.inject.Inject
+
 import scala.concurrent.Future
 import slick.driver.H2Driver.api._
 import AccountController._
@@ -34,9 +34,14 @@ object AccountController {
   )
 }
 
-class AccountController @Inject()(val dbConfigProvider: DatabaseConfigProvider,
-                                  val messagesApi: MessagesApi) extends Controller
-    with HasDatabaseConfigProvider[JdbcProfile] with I18nSupport {
+class AccountController @Inject()(val messagesApi: MessagesApi,
+                                  val accountService: AccountService
+                                 ) extends Controller with I18nSupport {
+
+  def list = Action { implicit rs =>
+    //TODO : Exclude id and password fields
+    Ok(views.html.admin.userlist(accountService.getAccounts))
+  }
 
   def list = TODO
 
