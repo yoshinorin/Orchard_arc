@@ -14,8 +14,8 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
 
   lazy val accountsQuery = TableQuery[Accounts]
 
-  def getAccounts: Future[Seq[Account]] = {
-    db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty)).result)
+  def getAccounts: Seq[Account] = {
+    Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty)).result), Duration.Inf)
   }
 
   def getAccountByUserName(userName: String): Option[Account] = {
