@@ -10,8 +10,9 @@ GET     /                           controllers.HomeController.index
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # Mapping to account controller
-GET     /user/list                  controllers.AccountController.list
-GET     /user/edit                  controllers.AccountController.edit(id: Option[Long] ?= None)
-POST    /user/create                controllers.AccountController.create
-POST    /user/update                controllers.AccountController.update
-POST    /user/remove/:id            controllers.AccountController.remove(id: Long)
+GET     /account/list                  controllers.AccountController.list
+GET     /account/login                 controllers.AccountController.login(userName: String, password: String)
+GET     /account/edit                  controllers.AccountController.edit(id: Option[Long] ?= None)
+POST    /account/create                controllers.AccountController.create
+POST    /account/update                controllers.AccountController.update
+POST    /account/remove/:id            controllers.AccountController.remove(id: Long)
