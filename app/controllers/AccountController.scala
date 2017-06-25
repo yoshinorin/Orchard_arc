@@ -15,6 +15,7 @@ import AccountController._
 
 object AccountController {
   case class AccountForm(id: Option[Long], userName: String, password: String, isAdmin: Option[Boolean])
+  case class LoginForm(userName: String, password: String)
 
   val accountForm = Form(
     mapping(
@@ -23,6 +24,13 @@ object AccountController {
       "password"    -> nonEmptyText(maxLength = 255),
       "isAdmin"     -> optional(boolean)
     )(AccountForm.apply)(AccountForm.unapply)
+  )
+
+  val loginForm = Form(
+    mapping(
+      "userName"    -> nonEmptyText(maxLength = 255),
+      "password"    -> nonEmptyText(maxLength = 255)
+    )(LoginForm.apply)(LoginForm.unapply)
   )
 }
 
