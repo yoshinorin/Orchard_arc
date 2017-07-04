@@ -42,7 +42,6 @@ class AccountController @Inject()(val messagesApi: MessagesApi,
     Ok(views.html.admin.userlist(accountService.getAccounts))
   }
 
-  def list = TODO
   def dologin = TODO
 
   def edit(id: Option[Long]) = TODO
