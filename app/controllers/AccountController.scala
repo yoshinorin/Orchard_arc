@@ -42,6 +42,10 @@ class AccountController @Inject()(val messagesApi: MessagesApi,
     Ok(views.html.admin.userlist(accountService.getAccounts))
   }
 
+  def login = Action { implicit rs =>
+    Ok(views.html.account.login(loginForm))
+  }
+
   def dologin = TODO
 
   def edit(id: Option[Long]) = TODO

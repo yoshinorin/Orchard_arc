@@ -1,6 +1,33 @@
-@(accountForm: Form[controllers.AccountController.AccountForm])(implicit request: Request[Any], messages: Messages)
+@(loginForm: Form[controllers.AccountController.LoginForm])(implicit request: Request[Any], messages: Messages)
 @import helper._
 
-@main("Log In") {
-  <h1>Log In</h1>
+@main("Login") {
+  @form(CSRF(routes.AccountController.dologin)) {
+  <div class="col-xs-3 col-xs-offset-4">
+    <div class="panel panel-default">
+      <div class="panel-heading text-center">Login</div>
+      <div class="panel-body text-center">
+        <fieldset>
+          @inputText(
+            loginForm("userName"),
+            'type -> "userName",
+            'placeholder -> "userName",
+            '_label -> "userName"
+          )
+          @inputText(
+            loginForm("password"),
+            'type -> "password",
+            'placeholder -> "password",
+            '_label -> "password"
+          )
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn">Log in</button>
+            </div>
+          </div>
+          </fieldset>
+      </div>
+    </div>
+  </div>
+  }
 }

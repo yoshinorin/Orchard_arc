@@ -11,7 +11,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # Mapping to account controller
 GET     /account/list                  controllers.AccountController.list
-GET     /account/login                 controllers.AccountController.login(userName: String, password: String)
+GET     /account/login                 controllers.AccountController.login
 GET     /account/edit                  controllers.AccountController.edit(id: Option[Long] ?= None)
 POST    /account/dologin               controllers.AccountController.dologin
 POST    /account/create                controllers.AccountController.create
