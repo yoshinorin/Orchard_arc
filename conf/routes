@@ -13,6 +13,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /account/list                  controllers.AccountController.list
 GET     /account/login                 controllers.AccountController.login(userName: String, password: String)
 GET     /account/edit                  controllers.AccountController.edit(id: Option[Long] ?= None)
+POST    /account/dologin               controllers.AccountController.dologin
 POST    /account/create                controllers.AccountController.create
 POST    /account/update                controllers.AccountController.update
 POST    /account/remove/:id            controllers.AccountController.remove(id: Long)

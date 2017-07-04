@@ -43,6 +43,7 @@ class AccountController @Inject()(val messagesApi: MessagesApi,
   }
 
   def list = TODO
+  def dologin = TODO
 
   def edit(id: Option[Long]) = TODO
 
