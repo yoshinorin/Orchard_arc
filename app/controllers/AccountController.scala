@@ -10,7 +10,6 @@ import app.services.{AccountService, _}
 import javax.inject.Inject
 
 import scala.concurrent.Future
-import slick.driver.H2Driver.api._
 import AccountController._
 
 object AccountController {
