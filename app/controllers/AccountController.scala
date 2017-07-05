@@ -33,9 +33,7 @@ object AccountController {
   )
 }
 
-class AccountController @Inject()(val messagesApi: MessagesApi,
-                                  val accountService: AccountService
-                                 ) extends Controller with I18nSupport {
+class AccountController @Inject()(val accountService: AccountService) extends InjectedController with I18nSupport {
 
   def list = Action { implicit rs =>
     //TODO : Exclude id and password fields
