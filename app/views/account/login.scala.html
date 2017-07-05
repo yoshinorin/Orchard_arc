@@ -2,7 +2,7 @@
 @import helper._
 
 @main("Login") {
-  @form(CSRF(routes.AccountController.dologin)) {
+  @form(CSRF(routes.AccountController.authenticate)) {
   <div class="col-xs-3 col-xs-offset-4">
     <div class="panel panel-default">
       <div class="panel-heading text-center">Login</div>
