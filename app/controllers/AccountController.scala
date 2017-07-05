@@ -44,7 +44,16 @@ class AccountController @Inject()(val accountService: AccountService) extends In
     Ok(views.html.account.login(loginForm))
   }
 
-  def dologin = TODO
+  def dologin = Action { implicit rs =>
+    loginForm.bindFromRequest.fold(
+      hasErrors => {
+        Ok(views.html.account.login(hasErrors))
+      },
+      user => {
+        Redirect(routes.HomeController.index)
+      }
+    )
+  }
 
   def edit(id: Option[Long]) = TODO
 
