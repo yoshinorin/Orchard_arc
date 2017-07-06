@@ -6,7 +6,7 @@ import scala.concurrent._
 import scala.concurrent.duration.Duration
 import ExecutionContext.Implicits.global
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
-import slick.driver.JdbcProfile
+import slick.jdbc.JdbcProfile
 import app.models._
 
 object AccountService {
@@ -16,7 +16,7 @@ object AccountService {
 }
 
 class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] {
-  import driver.api._
+  import profile.api._
 
   lazy val accountsQuery = TableQuery[Accounts]
 
