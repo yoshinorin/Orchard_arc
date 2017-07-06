@@ -7,8 +7,6 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.12.2"
 
-libraryDependencies += filters
-libraryDependencies += guice
 libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-slick" % "3.0.0",
   "com.typesafe.play" %% "play-slick-evolutions" % "3.0.0",
@@ -16,7 +14,9 @@ libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "5.1.36",
   //"com.typesafe.slick" %% "slick" % "3.1.1",
   //"com.typesafe.slick" % "slick-codegen_2.11" % "3.1.1",
-  "org.scalatestplus.play" %% "scalatestplus-play" % "3.0.0" % Test
+  "org.scalatestplus.play" %% "scalatestplus-play" % "3.0.0" % Test,
+  filters,
+  guice
 )
 
 // Adds additional packages into Twirl
