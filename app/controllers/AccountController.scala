@@ -49,8 +49,8 @@ class AccountController @Inject()(val accountService: AccountService) extends In
       hasErrors => {
         Ok(views.html.account.login(hasErrors))
       },
-      v => {
-        if (accountService.validateAccount(v.userName, v.password)) {
+      user => {
+        if (accountService.validateAccount(user.userName, user.password)) {
           Redirect(routes.HomeController.index)
         } else {
           Ok(views.html.account.login(loginForm))
