@@ -25,7 +25,7 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
   }
 
   def getAccountByUserName(userName: String): Option[Account] = {
-    Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind)).result.headOption), Duration.Inf)
+    Await.result(db.run(accountsQuery.filter(a => (a.userName === userName.bind) && (a.deletedAt.isEmpty)).result.headOption), Duration.Inf)
   }
 
   def createAccount(userName: String, password: String, isAdmin: Option[Boolean]): Boolean = {
@@ -48,7 +48,7 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
 
   def updateAccount(userName: String, password: String, isAdmin: Option[Boolean]): Boolean = {
     if (existsAdmin) {
-      db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind))
+      db.run(accountsQuery.filter(a => (a.userName === userName.bind) && (a.deletedAt.isEmpty))
                           .map(a => a.password -> a.updatedAt)
                           .update(password -> Some(new java.sql.Timestamp(System.currentTimeMillis())))
             )
@@ -60,7 +60,7 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
 
   def deleteAccount(userName: String): Boolean = {
     if (existsAdminExcludeMySelf(userName)) {
-      db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind))
+      db.run(accountsQuery.filter(a => (a.userName === userName.bind) && (a.deletedAt.isEmpty))
         .map(a => a.deletedAt)
         .update(Some(new java.sql.Timestamp(System.currentTimeMillis())))
       )
@@ -71,28 +71,28 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
   }
 
   def validateAccount(userName: String, password: String): Boolean = {
-    Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind) && (a.password === password.bind)).result.headOption), Duration.Inf) match {
+    Await.result(db.run(accountsQuery.filter(a => (a.userName === userName.bind) && (a.password === password.bind) && (a.deletedAt.isEmpty)).result.headOption), Duration.Inf) match {
       case Some(_) => true
       case _ => false
     }
   }
 
   def isAdmin(userName: String): Boolean = {
-    Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind) && (a.isAdmin === true)).result.headOption), Duration.Inf) match {
+    Await.result(db.run(accountsQuery.filter(a => (a.userName === userName.bind) && (a.isAdmin === true) && (a.deletedAt.isEmpty)).result.headOption), Duration.Inf) match {
       case Some(_) => true
       case _ => false
     }
   }
 
   private def existsAdmin: Boolean = {
-    Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.isAdmin === true)).result.headOption), Duration.Inf) match {
+    Await.result(db.run(accountsQuery.filter(a => (a.isAdmin === true) && (a.deletedAt.isEmpty)).result.headOption), Duration.Inf) match {
       case Some(_) => true
       case _ => false
     }
   }
 
   private def existsAdminExcludeMySelf(userName: String): Boolean = {
-    Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.isAdmin === true) && (a.userName =!= userName)).result.headOption), Duration.Inf) match {
+    Await.result(db.run(accountsQuery.filter(a => (a.isAdmin === true) && (a.userName =!= userName) && (a.deletedAt.isEmpty)).result.headOption), Duration.Inf) match {
       case Some(_) => true
       case _ => false
     }
