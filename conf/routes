@@ -14,6 +14,7 @@ GET     /account/list                  controllers.AccountController.list
 GET     /account/login                 controllers.AccountController.login
 GET     /account/edit                  controllers.AccountController.edit(id: Option[Long] ?= None)
 POST    /account/authenticate          controllers.AccountController.authenticate
+GET     /account/logout                controllers.AccountController.logout
 POST    /account/create                controllers.AccountController.create
 POST    /account/update                controllers.AccountController.update
 POST    /account/remove/:id            controllers.AccountController.remove(id: Long)

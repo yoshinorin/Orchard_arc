@@ -59,6 +59,12 @@ class AccountController @Inject()(val accountService: AccountService) extends In
     )
   }
 
+  def logout = Action {
+    Redirect(routes.HomeController.index).withNewSession.flashing(
+      "success" -> "You've been logged out"
+    )
+  }
+
   def edit(id: Option[Long]) = TODO
 
   def create = TODO
