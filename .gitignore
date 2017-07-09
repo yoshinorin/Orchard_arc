@@ -29,3 +29,6 @@ project/plugins/project/
 
 # VS Code
 .vscode
+
+# Others
+RUNNING_PID
