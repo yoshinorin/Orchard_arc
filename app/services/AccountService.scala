@@ -77,6 +77,13 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
     }
   }
 
+  def isAdmin(userName: String): Boolean = {
+    Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.userName === userName.bind) && (a.isAdmin === true)).result.headOption), Duration.Inf) match {
+      case Some(_) => true
+      case _ => false
+    }
+  }
+
   private def existsAdmin: Boolean = {
     Await.result(db.run(accountsQuery.filter(a => (a.deletedAt.isEmpty) && (a.isAdmin === true)).result.headOption), Duration.Inf) match {
       case Some(_) => true
