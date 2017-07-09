@@ -35,8 +35,7 @@ object AccountController {
 
 class AccountController @Inject()(val accountService: AccountService) extends InjectedController with I18nSupport with Secured {
 
-  def list = Action { implicit rs =>
-    //TODO : Exclude id and password fields
+  def list = withAdmin { userName => implicit rs =>
     Ok(views.html.admin.userlist(accountService.getAccounts))
   }
 
