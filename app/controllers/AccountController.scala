@@ -33,7 +33,7 @@ object AccountController {
   )
 }
 
-class AccountController @Inject()(val accountService: AccountService) extends InjectedController with I18nSupport {
+class AccountController @Inject()(val accountService: AccountService) extends InjectedController with I18nSupport with Secured {
 
   def list = Action { implicit rs =>
     //TODO : Exclude id and password fields
@@ -51,7 +51,7 @@ class AccountController @Inject()(val accountService: AccountService) extends In
       },
       user => {
         if (accountService.validateAccount(user.userName, user.password)) {
-          Redirect(routes.HomeController.index)
+          Redirect(routes.HomeController.index).withSession("userName" -> user.userName)
         } else {
           Ok(views.html.account.login(loginForm))
         }
