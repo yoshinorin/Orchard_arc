@@ -1,6 +1,7 @@
 package controllers
 
 import play.api.mvc._
+import play.mvc.Security._
 
 trait Secured {
 
@@ -8,7 +9,16 @@ trait Secured {
 
   private def onUnauthorized(request: RequestHeader) = Results.Redirect(routes.HomeController.index)
 
-  //def withAdmin = TODO
+  def withAuth(f: => String => Request[AnyContent] => Result) = {
+    Security.Authenticated(userName, onUnauthorized) { user =>
+      Action(request => f(user)(request))
+    }
+  }
 
-  //def withUser = TODO
+  //TODO: Have to check an administrator
+  def withAdmin(f: => String => Request[AnyContent] => Result) = {
+    Security.Authenticated(userName, onUnauthorized) { user =>
+      Action(request => f(user)(request))
+    }
+  }
 }
