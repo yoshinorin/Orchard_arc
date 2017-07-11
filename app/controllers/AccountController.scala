@@ -35,8 +35,12 @@ object AccountController {
 
 class AccountController @Inject()(val accountService: AccountService) extends InjectedController with I18nSupport with Secured {
 
-  def list = withAdmin { userName => implicit rs =>
-    Ok(views.html.admin.userlist(accountService.getAccounts))
+  def list = accountService.withAdmin { userName => implicit rs =>
+    if (accountService.isAdmin(userName)) {
+      Ok(views.html.admin.userlist(accountService.getAccounts))
+    } else {
+      Redirect(routes.HomeController.index)
+    }
   }
 
   def login = Action { implicit rs =>
