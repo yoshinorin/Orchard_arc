@@ -9,11 +9,6 @@ import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 import app.models._
 
-object AccountService {
-
-  def validateAccount(userName: String, password: String): Boolean = validateAccount(userName: String, password: String)
-
-}
 
 class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] {
   import profile.api._
