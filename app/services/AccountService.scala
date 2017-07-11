@@ -4,7 +4,6 @@ import javax.inject.Inject
 
 import scala.concurrent._
 import scala.concurrent.duration.Duration
-import ExecutionContext.Implicits.global
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 import app.models._

@@ -1,7 +1,6 @@
 package controllers
 
 import play.api.mvc._
-import play.mvc.Security._
 
 trait Secured {
 
