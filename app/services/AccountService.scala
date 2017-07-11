@@ -4,12 +4,13 @@ import javax.inject.Inject
 
 import scala.concurrent._
 import scala.concurrent.duration.Duration
+import play.api.mvc.{AnyContent, Request, Result}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 import app.models._
+import controllers.Secured
 
-
-class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] {
+class AccountService @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] with Secured {
   import profile.api._
 
   lazy val accountsQuery = TableQuery[Accounts]
@@ -89,6 +90,14 @@ class AccountService  @Inject()(protected val dbConfigProvider: DatabaseConfigPr
     Await.result(db.run(accountsQuery.filter(a => (a.isAdmin === true) && (a.userName =!= userName) && (a.deletedAt.isEmpty)).result.headOption), Duration.Inf) match {
       case Some(_) => true
       case _ => false
+    }
+  }
+
+  def withAdmin(f: => String => Request[AnyContent] => Result) = withAuth { userName => implicit rs =>
+    if (isAdmin(userName)) {
+      f(userName)(rs)
+    } else {
+      onUnauthorized(rs)
     }
   }
 }
