@@ -30,5 +30,8 @@ project/plugins/project/
 # VS Code
 .vscode
 
+# Front end
+frontend/node_modules/*
+
 # Others
 RUNNING_PID
