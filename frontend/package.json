@@ -3,6 +3,12 @@
   "version": "0.0.1",
   "description": "Front end for Orchard",
   "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "build:production": "webpack --config webpack-production.config.js"
+  },
   "dependencies": {
     "@types/react": "^15.0.38",
     "@types/react-dom": "^15.5.1",
@@ -21,9 +27,6 @@
     "source-map-loader": "^0.2.1",
     "typescript": "^2.4.1",
     "webpack": "^3.3.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "YoshinoriN",
   "license": "ISC"
