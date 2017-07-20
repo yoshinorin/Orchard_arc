@@ -25,6 +25,8 @@ libraryDependencies ++= Seq(
   guice
 )
 
+unmanagedResourceDirectories in Assets += baseDirectory.value / "frontend" / "dist"
+
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.example.controllers._"
 
