@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {AppBar, Toolbar, ToolbarGroup, ToolbarTitle, MenuItem, IconMenu, RaisedButton, IconButton, FontIcon, SvgIcon } from 'material-ui';
 
 import HomeIcon from "./icons/Home";
+import BackIcon from "./icons/Back";
 
 class NavBar extends React.Component {
   constructor() {
@@ -16,6 +17,7 @@ class NavBar extends React.Component {
         <Toolbar>
           <ToolbarGroup>
             <HomeIcon/>
+            <BackIcon/>
           </ToolbarGroup>
         </Toolbar>
       </MuiThemeProvider>
