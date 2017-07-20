@@ -15,3 +15,17 @@ npm install --save material-ui
 npm install --save-dev @types/material-ui
 npm install --save react-tap-event-plugin
 ```
+
+### watch
+
+```sh
+cd frontend
+npm run watch
+```
+
+### build
+
+```sh
+cd frontend
+npm run build
+```
