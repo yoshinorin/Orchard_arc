@@ -1,7 +1,10 @@
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: {
+    "navbar": "./src/components/navbar.tsx",
+    "icnos": "./src/components/icons.tsx"
+  },
   output: {
-    filename: "bundle.js",
+    filename: "[name].js",
     path: __dirname + "/dist"
   },
 
