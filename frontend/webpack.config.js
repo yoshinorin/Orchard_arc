@@ -1,7 +1,7 @@
 module.exports = {
   entry: {
-    "navbar": "./src/components/navbar.tsx",
-    "icnos": "./src/components/icons.tsx"
+    "navbar": "./src/renderer/components/navbar.tsx",
+    "icnos": "./src/renderer/components/icons/home.tsx"
   },
   output: {
     filename: "[name].js",
