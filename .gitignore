@@ -32,6 +32,7 @@ project/plugins/project/
 
 # Front end
 frontend/node_modules/*
+frontend/dist/*
 
 # Others
 RUNNING_PID
