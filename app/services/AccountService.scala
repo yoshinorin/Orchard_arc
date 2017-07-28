@@ -1,6 +1,6 @@
 package app.services
 
-import javax.inject.Inject
+import javax.inject.{Inject,Singleton}
 
 import scala.concurrent._
 import scala.concurrent.duration.Duration
@@ -10,6 +10,7 @@ import slick.jdbc.JdbcProfile
 import app.models._
 import controllers.Secured
 
+@Singleton()
 class AccountService @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] with Secured {
   import profile.api._
 
