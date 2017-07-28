@@ -10,6 +10,8 @@ GET     /                           controllers.HomeController.index
 GET     /frontend/dist/*file           controllers.Assets.versioned(file)
 
 # Mapping to account controller
+GET     /account                       controllers.AccountController.list
+GET     /account/                      controllers.AccountController.list
 GET     /account/list                  controllers.AccountController.list
 GET     /account/login                 controllers.AccountController.login
 GET     /account/edit                  controllers.AccountController.edit(id: Option[Long] ?= None)
