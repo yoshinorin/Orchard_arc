@@ -20,3 +20,8 @@ GET     /account/logout                controllers.AccountController.logout
 POST    /account/create                controllers.AccountController.create
 POST    /account/update                controllers.AccountController.update
 POST    /account/remove/:id            controllers.AccountController.remove(id: Long)
+
+# Api for Account
+GET     /api/account/list              controllers.api.AccountApi.list
+POST    /api/account/authenticate      controllers.api.AccountApi.authenticate
+GET     /api/account/logout            controllers.api.AccountApi.logout
