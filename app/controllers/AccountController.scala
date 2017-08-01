@@ -33,7 +33,7 @@ object AccountController {
   )
 }
 
-class AccountController @Inject()(val accountService: AccountService) extends InjectedController with I18nSupport with Secured {
+class AccountController @Inject()(val accountService: AccountService) extends InjectedController with I18nSupport {
 
   def list = accountService.withAdmin { userName => implicit rs =>
     if (accountService.isAdmin(userName)) {
