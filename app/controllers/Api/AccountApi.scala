@@ -20,14 +20,16 @@ object  AccountApi {
       )
     }
   }
-
 }
 
 class AccountApi @Inject()(val accountService: AccountService) extends InjectedController {
 
   import AccountApi._
 
-  def list = TODO
+  //TODO: Have to authenticate
+  def list = Action {
+    Ok(Json.toJson(accountService.getAccounts.toList))
+  }
 
   def authenticate = TODO
 
