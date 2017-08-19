@@ -4,6 +4,7 @@ import java.sql.Timestamp
 import java.util.Date
 
 import slick.driver.MySQLDriver.api._
+import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 
 class Accounts(tag: Tag) extends Table[Account](tag, "account") {
   val id: Rep[Long] = column[Long]("id", O.AutoInc, O.PrimaryKey)
@@ -24,4 +25,4 @@ case class Account(
   createdAt: java.sql.Timestamp = new java.sql.Timestamp(System.currentTimeMillis()),
   updatedAt: Option[java.sql.Timestamp] = None,
   deletedAt: Option[java.sql.Timestamp] = None
-)
+) extends Identity
