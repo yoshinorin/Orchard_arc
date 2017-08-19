@@ -7,6 +7,8 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.12.3"
 
+resolvers += Resolver.jcenterRepo
+
 scalacOptions ++= Seq(
   "-deprecation",
   "-feature",
@@ -21,9 +23,16 @@ libraryDependencies ++= Seq(
   //"com.typesafe.slick" %% "slick" % "3.1.1",
   //"com.typesafe.slick" % "slick-codegen_2.11" % "3.1.1",
   "org.scalatestplus.play" %% "scalatestplus-play" % "3.0.0" % Test,
+  "com.mohiva" %% "play-silhouette" % "5.0.0",
+  "com.mohiva" %% "play-silhouette-password-bcrypt" % "5.0.0",
+  "com.mohiva" %% "play-silhouette-persistence" % "5.0.0",
+  "com.mohiva" %% "play-silhouette-crypto-jca" % "5.0.0",
+  "com.mohiva" %% "play-silhouette-testkit" % "5.0.0" % "test",
   filters,
   guice
 )
+
+routesGenerator := InjectedRoutesGenerator
 
 unmanagedResourceDirectories in Assets += baseDirectory.value / "frontend" / "dist"
 
