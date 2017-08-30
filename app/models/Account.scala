@@ -25,4 +25,9 @@ case class Account(
   createdAt: java.sql.Timestamp = new java.sql.Timestamp(System.currentTimeMillis()),
   updatedAt: Option[java.sql.Timestamp] = None,
   deletedAt: Option[java.sql.Timestamp] = None
+)
+
+case class UserIdentify (
+  userName: String,
+  loginInfo: LoginInfo
 ) extends Identity
