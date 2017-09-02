@@ -16,8 +16,8 @@ scalacOptions ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.typesafe.play" %% "play-slick" % "3.0.0",
-  "com.typesafe.play" %% "play-slick-evolutions" % "3.0.0",
+  "com.typesafe.play" %% "play-slick" % "3.0.1",
+  "com.typesafe.play" %% "play-slick-evolutions" % "3.0.1",
   "com.typesafe.play" %% "play-json" % "2.6.3",
   "mysql" % "mysql-connector-java" % "5.1.36",
   //"com.typesafe.slick" %% "slick" % "3.1.1",
